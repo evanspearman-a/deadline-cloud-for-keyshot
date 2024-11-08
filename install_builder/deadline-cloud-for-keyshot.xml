@@ -80,6 +80,31 @@
             </conditionRuleList>
             <actionList>
                 <setInstallerVariable name="keyshot_scripts_directory" value=""/>
+                <if>
+                    <conditionRuleList>
+                        <platformTest type="osx" />
+                    </conditionRuleList>
+                    <actionList>
+                        <if>
+                            <conditionRuleList>
+                                <fileExists path="/Library/Application Support/KeyShot/Scripts" />
+                            </conditionRuleList>
+                            <actionList>
+                                <setInstallerVariable name="keyshot_scripts_directory" value="/Library/Application Support/KeyShot/Scripts" />
+                            </actionList>
+                            <elseActionList>
+                                <if>
+                                    <conditionRuleList>
+                                        <fileExists path="/Library/Application Support/KeyShot12/Scripts" />
+                                    </conditionRuleList>
+                                    <actionList>
+                                        <setInstallerVariable name="keyshot_scripts_directory" value="/Library/Application Support/KeyShot12/Scripts" />
+                                    </actionList>
+                                </if>
+                            </elseActionList>
+                        </if>
+                    </actionList>
+                </if>
             </actionList>
         </if>
     </initializationActionList>
